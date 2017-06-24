@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="Poh food delivery">
+        <meta name="keywords" content="HTML,CSS,XML,Javascript">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Home</title>
+        <link rel="stylesheet" type="text/css" href="css/POH.css">
+
+<!-- START OF HIT COUNTER CODE --><br><script language="JavaScript" src="http://www.counter160.com/js.js?img=10"></script><br><a href="https://www.000webhost.com"><img src="http://www.counter160.com/images/10/left.png" alt="Free web hosting" border="0" align="texttop"></a><a href="http://www.hosting24.com"><img alt="Web hosting" src="http://www.counter160.com/images/10/right.png" border="0" align="texttop"></a><!-- END OF HIT COUNTER CODE -->
+
+        <style>
+body {
+    background-image: url("image/HomePageBG.jpg");
+    background-size: cover;
+    background-position: right bottom;
+    background-attachment: fixed;
+}
+
+/* FADE IN TAB */
+ul.tab {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    bottom: 0;
+}
+/* Float the list items side by side */
+ul.tab li {float: left;}
+/* Style the links inside the list items */
+ul.tab li a {
+    display: inline-block;
+    color: #00CED1;
+    text-align: center;
+    padding: 14px 60px;
+    width: 100%;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 17px;
+    background-color: rgba(0,128,128,0.7);
+}
+/* Change background color of links on hover */
+ul.tab li a:hover {
+    background-color: #F8F8FF;
+    color: #20B2AA;
+}
+/* Create an active/current tablink class */
+ul.tab li a:focus, .active {
+    background-color: #ccc;
+}
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    box-shadow: 20px 20px 20px 20px rgba(32,178,170,1);
+    padding: 6px 12px;
+    -webkit-animation: fadeEffect 1s;
+    animation: fadeEffect 1s;
+}
+.tabcontent h2 {
+    font-size: 200%;
+    color: #00CED1;
+}
+.tabcontent a {
+    text-decoration: none;
+}
+@-webkit-keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+@keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+        </style>
+    </head>
+    <body> 
+<! -- NAV MENU -- > 
+<div class="scrollmenu" style="width: 100%;">
+    <a href="index.html">HOME</a>
+    <a href="About.html">ABOUT</a>
+    <a href="Cuisines.html">CUISINES</a>
+    <a href="Order.html">ORDER POH</a>
+    <a href="Contact.html">CONTACT</a>
+</div>
+<br><br><br>
+
+<! -- LOGO -- >
+<div style="float: left; position: fixed; background-color: rgba(255,0,0,0.1);">
+    <a href="index.html" style="color: #FF4500; font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif; text-align: left; font-size: 200%; text-decoration: none;
+   "
+><h1>POH<br>FOOD</h1></a>
+</div>
+
+<! -- main, for the entire details of web page -- >
+<div class="main">
+        <div class="welcome">
+            <h1 style="color: #DAA520;">Welcome to Poh food!</h1>
+        </div>
+            <p>Asian foods at your doorstep!</p>       
+        <br>
+
+
+<! -- FADE IN CUISINES DESCRIPTION -- >
+<ul class="tab">
+  <li><a href="#" class="tablinks" onclick="countryCuisine(event, 'filipino')">Filipino</a></li>
+  <li><a href="#" class="tablinks" onclick="countryCuisine(event, 'japanese')">Japanese</a></li>
+  <li><a href="#" class="tablinks" onclick="countryCuisine(event, 'vietnamese')">Vietnamese</a></li>
+</ul>
+
+<div id="filipino" class="tabcontent">
+  <a href="Filipino.html"><h2>Filipino</h2></a>
+  <p>The style of working as the food associated with it have evolved<br>
+     over many centuries from their astronesian orgin to mixed cuisine<br>
+     indian, japanese, malay, chinese ,spanish, and american. As well as<br>
+     others adapted to indigenous ingredients and local plate.</p>
+</div>
+
+<div id="japanese" class="tabcontent">
+  <a href="Japanese.html"><h2>Japanese</h2></a>
+  <p>Traditional cuisine of japan is an emphasis seasonal ingredients.<br>
+     side disehes often consist of fish, and pickled vegetables.</p>
+</div>
+
+<div id="vietnamese" class="tabcontent">
+  <a href="Vietnamese.html"><h2>Vietnamese</h2></a>
+  <p>Encompasses foods and beverages of vietnam, and features a<br>
+     combination of five fudamentals tastes in the overall meal.</p>
+</div>
+<! -- JAVASCRIPT FOR THE CUISINES DESCRIPTION -->
+<script>
+function countryCuisine(evt, countryName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(countryName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+</script>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+<! -- SLIDE SHOW HTML -- >
+<div class="slideshow-container">
+
+<div class="mySlides fade">
+  <img src="image/pinoy pansit miki.jpg" style="width:70%">
+  <div class="text">Pinoy Pancit Miki</div>
+</div>
+
+<div class="mySlides fade">
+  <img src="image/ukoy.jpg" style="width:70%">
+  <div class="text">Ukoy</div>
+</div>
+
+<div class="mySlides fade">
+  <img src="image/sashimi.jpg" style="width:70%">
+  <div class="text">Sashimi</div>
+</div>
+
+<div class="mySlides fade">
+  <img src="image/Sushi Box.jpg" style="width:70%">
+  <div class="text">Sushi Bento</div>
+</div>
+
+<div class="mySlides fade">
+  <img src="image/Banh mi.jpg" style="width:50%">
+  <div class="text">Banh mi</div>
+</div>
+
+<div class="mySlides fade">
+  <img src="image/pho.jpg" style="width:70%">
+  <div class="text">Pho</div>
+</div>
+<br>
+<div style="text-align:center">
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+</div>
+</div>
+
+<! -- JavaScript for the slides -- >
+<script>
+var slideIndex = 0;
+showSlides();
+
+function showSlides() {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    var dots = document.getElementsByClassName("dot");
+    for (i = 0; i < slides.length; i++) {
+       slides[i].style.display = "none";
+    }
+    slideIndex++;
+    if (slideIndex> slides.length) {slideIndex = 1}
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex-1].style.display = "block";
+    dots[slideIndex-1].className += " active";
+    setTimeout(showSlides, 5000); // Change image every 2 seconds
+}
+</script>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+</div>
+
+    </body>
+</html>

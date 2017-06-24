@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <title>Contact</title>
+        <meta charset="UTF-8">
+        <meta name="description" content="Poh food delivery">
+        <meta name="keywords" content="HTML,CSS,XML,Javascript">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="css/POH.css">
+
+<!-- START OF HIT COUNTER CODE --><br><script language="JavaScript" src="http://www.counter160.com/js.js?img=10"></script><br><a href="https://www.000webhost.com"><img src="http://www.counter160.com/images/10/left.png" alt="Free web hosting" border="0" align="texttop"></a><a href="http://www.hosting24.com"><img alt="Web hosting" src="http://www.counter160.com/images/10/right.png" border="0" align="texttop"></a><!-- END OF HIT COUNTER CODE -->
+
+        <script src=""></script>
+        <style>
+body {
+    background-image: url("image/Diguan at puto.jpg");
+    background-size: cover;
+    background-position: right bottom;
+    background-attachment: fixed;
+}
+        </style>
+    </head>
+    <body>
+<! -- Start of Menu and Poh -- > 
+<div class="scrollmenu" style="width: 100%;">
+    <a href="index.html">HOME</a>
+    <a href="About.html">ABOUT</a>
+    <a href="Cuisines.html">CUISINES</a>
+    <a href="Order.html">ORDER POH</a>
+    <a href="Contact.html">CONTACT</a>
+</div>
+<br><br><br>
+
+<! -- LOGO -- >
+<div style="float: left; position: fixed; background-color: rgba(255,0,0,0.1);">
+    <a href="index.html" style="color: #FF4500; font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif; text-align: left; font-size: 200%; text-decoration: none;
+   "
+><h1>POH<br>FOOD</h1></a>
+</div>
+
+<div class="main">
+<! -- Google map -- >
+  <div class="welcome">
+    <h1>Contact us</h1>
+  </div>
+<div style="width: 50%; float: left; margin-right: 50px; box-shadow: 0 10px 20px 0 rgba(0,0,0,0.7); padding: 15px 0;">
+    <address style="font-size:30px; padding-right: 30px;">
+        ADDRESS<br>
+        Sukhumvit 42 Road<br>
+        Thailand, Bangkok<br><br>
+        OPENING HOURS<br>
+        Mon - Fri: 11am - 10pm<br>
+        Sat - Sun: 11am - 12am<br><br>
+        CONTACT<br>
+        MOB: +66949748068
+    </address>
+</div>
+<div id="map" style="width: 500px; height: 400px; background: black; margin-left: 20px;"></div>
+<script>
+function myMap() {
+  var myCenter = new google.maps.LatLng(13.7355, 100.6615);
+  var mapCanvas = document.getElementById("map");
+  var mapOptions ={center: myCenter, zoom: 15};
+  var map = new google.maps.Map(mapCanvas, mapOptions);
+  var marker = new google.maps.Marker({position:myCenter});
+  marker.setMap(map);
+  var infoWindow = new google.maps.InfoWindow({
+      content: "Our Poh delivery office HQ"
+  });
+  infowindow.open(map, marker);
+}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script>
+</div>
+<br><br><br><br><br><br><br>
+</div>
+
+    </body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <title>Sign In</title>
+
+        <meta charset="UTF-8">
+        <meta name="description" content="Poh food delivery">
+        <meta name="keywords" content="HTML,CSS,XML,Javascript">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link rel="stylesheet" type="text/css" href="css/OPS.css">
+ 
+        <script src="js/OPS.js"></script>
+
+        <style>
+form {
+    border: 3px solid #f1f1f1;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #000000;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.signinbtn {
+    width: 40%;
+}
+
+.container {
+    padding: 16px;
+}
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+       display: block;
+       float: none;
+    }
+}
+        </style>
+    </head>
+    
+    <body>
+
+  <! -- NAV MENU -- >
+      <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="signin.html">Sign In</a>
+        <a href="signup.html">Sign Up</a>
+        
+      </div>
+      <span style="font-size:50px;cursor:pointer" onclick="openNav()">&#9776; OP</span>
+     </div>
+
+    <div id="main"><h1 style="color: #F8F8FF; font-size: 60px">Sign In</h1>
+
+    <! -- Sign In -- > 
+<form method="POST" action="action_page.php">
+  <div class="container TR">
+    <label style="font-size: 25px;"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="uname" required>
+
+    <label style="font-size: 25px;"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+        
+    <button type="submit" style="font-size: 20px;" class="signinbtn TR">Sign In</button><br>
+    <input type="checkbox" checked="checked"> Remember me
+    <span class="psw">Forgot <a href="#">password?</a></span><br><br><br>
+  </div>
+</form>
+
+
+    </div>
+
+
+    </body>
+</html>

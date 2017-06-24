@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Michelle Luyenga 216110108 -->
+<head>
+
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title>Home-- Our Earth</title>
+
+    <style>
+    html,
+    body,
+    #viewDiv {
+      padding: 0px 20px 10px 10px;
+      margin: 0px 20px 10px 0px;
+      height: 100%;
+      width: 100%;
+    }
+    </style>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+    body {
+        padding-top: 40px;
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    }
+    </style>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <link rel="stylesheet" href="https://js.arcgis.com/4.3/esri/css/main.css">
+    <script src="https://js.arcgis.com/4.3/"></script>
+
+    <script>
+      require([
+          "esri/Map",
+          "esri/views/SceneView",
+          "esri/widgets/Search",
+          "esri/widgets/Home",
+          "esri/widgets/Locate",
+          "esri/widgets/Expand",
+          "esri/widgets/BasemapGallery",
+          "dojo/domReady!"
+        ], function(Map, SceneView, Search, Home, Locate, Expand, BasemapGallery){
+          var map = new Map({
+            basemap: "hybrid",//streets
+            ground: "world-elevation"
+          });
+          var view = new SceneView({
+            container: "viewDiv",     // Reference to the scene div created in step 5
+            map: map,                 // Reference to the map object created before the scene
+            scale: 50000000,          // Sets the initial scale to 1:50,000,000
+            center: [100.661452, 13.735194]  // Sets the center point of view with lon/lat
+          });
+          
+      // clear the view's default UI components if
+      // app is used on a small device
+      view.watch("heightBreakpoint, widthBreakpoint", function() {
+        var ui = view.ui;
+
+        if (view.heightBreakpoint === "xsmall" || view.widthBreakpoint ===
+          "xsmall") {
+          ui.components = [
+            "attribution"
+          ];
+        }
+        else {
+          ui.components = [
+            "attribution",
+            "navigation-toggle",
+            "compass",
+            "zoom"
+          ];
+        }
+      });
+
+          //Search box
+          var searchWidget = new Search({
+            view: view
+          });
+          // Add the search widget to the very top left corner of the view
+          view.ui.add(searchWidget, {
+            position: "top-left",
+            index: 0
+          });
+
+          var homeBtn = new Home({
+          view: view
+          });
+          // Add the home button to the top left corner of the view
+          view.ui.add(homeBtn, "top-left");
+
+          var locateBtn = new Locate({
+            view: view
+          });
+          // Add the locate widget to the top left corner of the view
+          view.ui.add(locateBtn, {
+            position: "top-left"
+          });
+
+          var basemapGallery = new BasemapGallery({
+            view: view
+          });
+
+          // Add the widget to the bottom left corner of the view
+          view.ui.add(basemapGallery, {
+            position: "top-right"
+          });
+
+          var bgExpand = new Expand({
+          view: view,
+          content: basemapGallery.domNode,
+          expandIconClass: "esri-icon-basemap"
+          });
+
+          // Add the expand instance to the ui
+
+          view.ui.add(bgExpand, "top-right");
+
+          });
+    </script>
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <a class="navbar-brand navbar-right" href="index.html">Our Earth</a>
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="virtualize.html">Virtualize</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1>Our Earth</h1>
+            </div>
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+    <div id="viewDiv"></div>
+    
+
+</body>
+<script type="text/javascript" src="js/bootstrap.js" ></script>
+<script type="text/javascript" src="js/jquery.js" ></script>
+
+</html>

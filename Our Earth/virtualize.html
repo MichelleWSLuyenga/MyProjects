@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Michelle Luyenga 216110108 -->
+<head>
+
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title>Virtualize-- Our Earth</title>
+ 
+    <style>
+    html,
+    body,
+    #viewDiv {
+      padding: 0px 20px 10px 10px;
+      margin: 0px 20px 10px 0px;
+      height: 100%;
+      width: 100%;
+    }
+    </style>
+
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+    body {
+        padding-top: 40px;
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    }
+    </style>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <link rel="stylesheet" href="https://js.arcgis.com/4.3/esri/css/main.css">
+    <script src="https://js.arcgis.com/4.3/"></script>
+
+    <script>
+            require([
+      "esri/Map",
+      "esri/views/SceneView",
+      "esri/layers/SceneLayer",
+      "esri/renderers/SimpleRenderer",
+      "esri/symbols/MeshSymbol3D",
+      "esri/widgets/Search",
+      "esri/widgets/Home",
+      "dojo/domReady!"
+    ], function(Map, SceneView, SceneLayer,
+      SimpleRenderer, MeshSymbol3D, Search, Home
+    ) {
+
+      // Create default MeshSymbol3D for symbolizing SceneLayer
+      // a new FillSymbol3DLayer is created by default within the symbol
+      var symbol = new MeshSymbol3D();
+
+      // Create the renderer and configure visual variables
+      var renderer = new SimpleRenderer({
+        symbol: symbol,
+        visualVariables: [{
+          // specifies a visual variable of continuous color
+          type: "color",
+          // based on a field indicating the year a building was constructed
+          field: "CNSTRCT_YR",
+          // color ramp from yellow to aqua blue
+          // buildings built between 1915 and 2015 will be
+          // assigned a color proportional to the min and max colors
+          // specified below
+          stops: [
+          {
+            value: 1915,
+            color: "#FBE789"
+          },
+          {
+            value: 2017,
+            color: "#1B90A7"
+          }]
+        }]
+      });
+
+      // Create SceneLayer and add to the map
+      var sceneLayer = new SceneLayer({
+        url: "https://tiles.arcgis.com/tiles/V6ZHFr6zdgNZuVG0/arcgis/rest/services/NYCatt/SceneServer",
+        renderer: renderer // Set the renderer to sceneLayer
+      });
+
+      // Create Map
+      var map = new Map({
+        basemap: "gray",
+        ground: "world-elevation",
+        layers: [sceneLayer]
+      });
+
+      // Create the SceneView and add the map
+      var view = new SceneView({
+        container: "viewDiv",
+        map: map,
+        camera: {
+          position: {
+            x: -8241124,
+            y: 4968029,
+            z: 580,
+            spatialReference: 3857
+          },
+          heading: 58,
+          tilt: 86
+        }
+      });
+
+      //Search box
+          var searchWidget = new Search({
+            view: view
+          });
+          // Add the search widget to the very top left corner of the view
+          view.ui.add(searchWidget, {
+            position: "top-left",
+            index: 0
+          });
+
+        var homeBtn = new Home({
+          view: view
+          });
+          // Add the home button to the top left corner of the view
+          view.ui.add(homeBtn, "top-left");
+    });
+    </script>
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Our Earth</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="virtualize.html">Virtualize</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1>Virtual Our Earth</h1>
+            </div>
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+    <div id="viewDiv"></div> 
+
+</body>
+
+</html>

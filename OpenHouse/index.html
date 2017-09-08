@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Michelle Luyenga 216110108 -->
+<head>
+
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title>Home-- Our Earth</title>
+
+    <style>
+    html,
+    body,
+    #viewDiv {
+      padding: 0px 20px 10px 10px;
+      margin: 10px 20px 10px 0px;
+      height: 100%;
+      width: 100%;
+    }
+
+    #optionsDiv {
+      position: absolute;
+      bottom: 17px;
+      width: 100%;
+      padding: 20px 0;
+      z-index: 1;
+      text-align: center;
+    }
+
+    button {
+      background: white;
+      padding: 7px;
+      border: 1px solid #005e95;
+      font-size: 0.9em;
+      margin: 5px;
+      color: #005e95;
+      font-family: "Avenir Next W01", "Arial", sans-serif;
+    }
+
+    button:hover {
+      background: #005e95;
+      color: white;
+      cursor: pointer;
+    }
+
+    
+    </style>
+
+
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+
+
+
+    <style>
+    body {
+        padding-top: 40px;
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    }
+    </style>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <link rel="stylesheet" href="https://js.arcgis.com/4.3/esri/css/main.css">
+    <script src="https://js.arcgis.com/4.3/"></script>
+
+    <script>
+      require([
+          "esri/Map",
+          "esri/views/SceneView",
+          "esri/widgets/Search",
+          "esri/widgets/Home",
+          "esri/widgets/Locate",
+          "esri/widgets/Expand",
+          "esri/widgets/BasemapGallery",
+          "dojo/query",
+          "dojo/on",
+          "dojo/domReady!"
+        ], function(Map, SceneView, Search, Home, Locate, Expand, BasemapGallery, query, on){
+          var map = new Map({
+            basemap: "hybrid",//streets
+            ground: "world-elevation"
+          });
+          var view = new SceneView({
+            container: "viewDiv",     // Reference to the scene div created in step 5
+            map: map,                 // Reference to the map object created before the scene
+            scale: 50000000,          // Sets the initial scale to 1:50,000,000
+            center: [100.661452, 13.735194]  // Sets the center point of view with lon/lat
+          });
+          
+      // clear the view's default UI components if
+      // app is used on a small device
+      view.watch("heightBreakpoint, widthBreakpoint", function() {
+        var ui = view.ui;
+
+        if (view.heightBreakpoint === "xsmall" || view.widthBreakpoint ===
+          "xsmall") {
+          ui.components = [
+            "attribution"
+          ];
+        }
+        else {
+          ui.components = [
+            "attribution",
+            "navigation-toggle",
+            "compass",
+            "zoom"
+          ];
+        }
+
+
+      });
+
+
+
+        /*****************************************************************
+         * 
+         * Add event listeners to go to a target point using animation options
+         *
+         *****************************************************************/
+
+        // The target point is a new camera obtained by shifting the current camera 30 degrees to the east
+
+        function shiftCamera(deg) {
+          var camera = view.camera.clone();
+          camera.position.longitude += deg;
+          return camera;
+        }
+
+        on(dojo.query("#default"), "click", function() {
+          // Don't set any animation options for a default camera flight
+          view.goTo(shiftCamera(60));
+        });
+
+        on(dojo.query("#linearSlow"), "click", function() {
+          view.goTo(shiftCamera(60),
+            // Animation options for a slow linear camera flight
+            {
+              speedFactor: 0.1,
+              easing: "linear"
+            });
+        });
+        on(dojo.query("#linearFast"), "click", function() {
+          view.goTo(shiftCamera(60),
+            // Animation options for a fast linear camera flight
+            {
+              speedFactor: 6,
+              easing: "linear"
+            });
+        });
+
+        on(dojo.query("#expoIncrease"), "click", function() {
+          view.goTo(shiftCamera(60),
+            // Animation options for a camera flight with an increasing speed
+            {
+              duration: 4000,
+              easing: "in-expo"
+            });
+        });
+
+        on(dojo.query("#fixedDuration"), "click", function() {
+          view.goTo(shiftCamera(30), {
+            duration: 10000,
+            maxDuration: 10000 // Make sure to set maxDuration if the duration is bigger than 8000 ms
+          });
+        });
+
+        // Define your own function for the easing option
+        function customEasing(t) {
+          return 1 - Math.abs(Math.sin(-1.7 + t * 4.5 * Math.PI)) * Math.pow(
+            0.5, t * 10);
+        }
+        
+
+
+      
+        //LEFT BUTTON
+          //Search box
+          var searchWidget = new Search({
+            view: view
+          });
+          // Add the search widget to the very top left corner of the view
+          view.ui.add(searchWidget, {
+            position: "top-left",
+            index: 0
+          });
+
+          var homeBtn = new Home({
+          view: view
+          });
+          // Add the home button to the top left corner of the view
+          view.ui.add(homeBtn, "top-left");
+
+          var locateBtn = new Locate({
+            view: view
+          });
+          // Add the locate widget to the top left corner of the view
+          view.ui.add(locateBtn, {
+            position: "top-left"
+          });
+
+          var basemapGallery = new BasemapGallery({
+            view: view
+          });
+
+          // Add the widget to the bottom left corner of the view
+          view.ui.add(basemapGallery, {
+            position: "top-right"
+          });
+
+          var bgExpand = new Expand({
+          view: view,
+          content: basemapGallery.domNode,
+          expandIconClass: "esri-icon-basemap"
+          });
+
+          // Add the expand instance to the ui
+
+          view.ui.add(bgExpand, "top-right");
+
+          });
+
+
+
+
+    </script>
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html">Our Earth</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">       
+    </div>
+    <!-- /.container -->
+
+
+    <div id="optionsDiv">
+    <button id="default">Default flight</button>
+    <button id="linearSlow">Linear slow flight</button>
+    <button id="linearFast">Linear fast flight</button>
+    <button id="expoIncrease">Exponentially increasing speed flight</button>
+    <button id="fixedDuration">10 seconds flight</button>
+
+  </div>
+    <div id="viewDiv"></div>
+    <div id="infoDiv">
+    <input class="esri-component esri-widget-button esri-widget esri-interactive" type="button"
+      id="switch-btn" value="3D">
+  </div>
+    
+
+</body>
+<script type="text/javascript" src="js/bootstrap.js" ></script>
+<script type="text/javascript" src="js/jquery.js" ></script>
+
+</html>
